@@ -4,6 +4,7 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -32,6 +33,7 @@ public class User implements Serializable {
 	@Column(name="FullName")
 	private String fullName;
 
+	@JsonIgnore
 	@Column(name="PasswordHash")
 	private String passwordHash;
 
