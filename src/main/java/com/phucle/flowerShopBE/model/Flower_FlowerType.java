@@ -17,15 +17,15 @@ public class Flower_FlowerType implements Serializable {
 	@Column(name="Id")
 	private int id;
 
-	//bi-directional many-to-one association to Flower
-	@ManyToOne
-	@JoinColumn(name="FlowerId")
-	private Flower flower;
-
 	//bi-directional many-to-one association to FlowerType
 	@ManyToOne
 	@JoinColumn(name="FlowerTypeId")
 	private FlowerType flowerType;
+
+	//bi-directional many-to-one association to Flower
+	@ManyToOne
+	@JoinColumn(name="FlowerId")
+	private Flower flower;
 
 	public Flower_FlowerType() {
 	}
@@ -38,20 +38,20 @@ public class Flower_FlowerType implements Serializable {
 		this.id = id;
 	}
 
-	public Flower getFlower() {
-		return this.flower;
-	}
-
-	public void setFlower(Flower flower) {
-		this.flower = flower;
-	}
-
 	public FlowerType getFlowerType() {
 		return this.flowerType;
 	}
 
 	public void setFlowerType(FlowerType flowerType) {
 		this.flowerType = flowerType;
+	}
+
+	public Flower getFlower() {
+		return this.flower;
+	}
+
+	public void setFlower(Flower flower) {
+		this.flower = flower;
 	}
 
 }

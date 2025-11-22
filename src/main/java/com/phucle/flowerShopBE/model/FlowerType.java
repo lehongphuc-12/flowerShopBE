@@ -6,25 +6,25 @@ import java.util.List;
 
 
 /**
- * The persistent class for the flower_types database table.
+ * The persistent class for the FlowerTypes database table.
  * 
  */
 @Entity
-@Table(name="flower_types")
+@Table(name="FlowerTypes")
 @NamedQuery(name="FlowerType.findAll", query="SELECT f FROM FlowerType f")
 public class FlowerType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="flower_type_id")
+	@Column(name="FlowerTypeId")
 	private int flowerTypeId;
 
-	@Column(name="type_name")
+	@Column(name="TypeName")
 	private String typeName;
 
-	//bi-directional many-to-one association to FlowerFlowerType
+	//bi-directional many-to-one association to Flower_FlowerType
 	@OneToMany(mappedBy="flowerType")
-	private List<FlowerFlowerType> flowerFlowerTypes;
+	private List<Flower_FlowerType> flowerFlowerTypes;
 
 	public FlowerType() {
 	}
@@ -45,22 +45,22 @@ public class FlowerType implements Serializable {
 		this.typeName = typeName;
 	}
 
-	public List<FlowerFlowerType> getFlowerFlowerTypes() {
+	public List<Flower_FlowerType> getFlowerFlowerTypes() {
 		return this.flowerFlowerTypes;
 	}
 
-	public void setFlowerFlowerTypes(List<FlowerFlowerType> flowerFlowerTypes) {
+	public void setFlowerFlowerTypes(List<Flower_FlowerType> flowerFlowerTypes) {
 		this.flowerFlowerTypes = flowerFlowerTypes;
 	}
 
-	public FlowerFlowerType addFlowerFlowerType(FlowerFlowerType flowerFlowerType) {
+	public Flower_FlowerType addFlowerFlowerType(Flower_FlowerType flowerFlowerType) {
 		getFlowerFlowerTypes().add(flowerFlowerType);
 		flowerFlowerType.setFlowerType(this);
 
 		return flowerFlowerType;
 	}
 
-	public FlowerFlowerType removeFlowerFlowerType(FlowerFlowerType flowerFlowerType) {
+	public Flower_FlowerType removeFlowerFlowerType(Flower_FlowerType flowerFlowerType) {
 		getFlowerFlowerTypes().remove(flowerFlowerType);
 		flowerFlowerType.setFlowerType(null);
 

@@ -46,6 +46,11 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private List<Order> orders;
 
+	//bi-directional many-to-one association to Role
+	@ManyToOne
+	@JoinColumn(name="RoleId")
+	private Role role;
+
 	public User() {
 	}
 
@@ -147,6 +152,14 @@ public class User implements Serializable {
 		order.setUser(null);
 
 		return order;
+	}
+
+	public Role getRole() {
+		return this.role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

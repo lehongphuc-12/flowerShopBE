@@ -6,31 +6,33 @@ import java.math.BigDecimal;
 
 
 /**
- * The persistent class for the order_items database table.
+ * The persistent class for the OrderItems database table.
  * 
  */
 @Entity
-@Table(name="order_items")
+@Table(name="OrderItems")
 @NamedQuery(name="OrderItem.findAll", query="SELECT o FROM OrderItem o")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="order_item_id")
+	@Column(name="OrderItemId")
 	private int orderItemId;
 
+	@Column(name="Price")
 	private BigDecimal price;
 
+	@Column(name="Quantity")
 	private int quantity;
 
 	//bi-directional many-to-one association to Flower
 	@ManyToOne
-	@JoinColumn(name="flower_id")
+	@JoinColumn(name="FlowerId")
 	private Flower flower;
 
 	//bi-directional many-to-one association to Order
 	@ManyToOne
-	@JoinColumn(name="order_id")
+	@JoinColumn(name="OrderId")
 	private Order order;
 
 	public OrderItem() {

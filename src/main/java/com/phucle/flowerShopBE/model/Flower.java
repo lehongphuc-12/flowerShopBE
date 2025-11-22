@@ -46,6 +46,10 @@ public class Flower implements Serializable {
 	@OneToMany(mappedBy="flower")
 	private List<CartItem> cartItems;
 
+	//bi-directional many-to-one association to Flower_FlowerType
+	@OneToMany(mappedBy="flower")
+	private List<Flower_FlowerType> flowerFlowerTypes;
+
 	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="CategoryId")
@@ -54,10 +58,6 @@ public class Flower implements Serializable {
 	//bi-directional many-to-one association to OrderItem
 	@OneToMany(mappedBy="flower")
 	private List<OrderItem> orderItems;
-
-	//bi-directional many-to-one association to FlowerFlowerType
-	@OneToMany(mappedBy="flower")
-	private List<FlowerFlowerType> flowerFlowerTypes;
 
 	public Flower() {
 	}
@@ -148,6 +148,28 @@ public class Flower implements Serializable {
 		return cartItem;
 	}
 
+	public List<Flower_FlowerType> getFlowerFlowerTypes() {
+		return this.flowerFlowerTypes;
+	}
+
+	public void setFlowerFlowerTypes(List<Flower_FlowerType> flowerFlowerTypes) {
+		this.flowerFlowerTypes = flowerFlowerTypes;
+	}
+
+	public Flower_FlowerType addFlowerFlowerType(Flower_FlowerType flowerFlowerType) {
+		getFlowerFlowerTypes().add(flowerFlowerType);
+		flowerFlowerType.setFlower(this);
+
+		return flowerFlowerType;
+	}
+
+	public Flower_FlowerType removeFlowerFlowerType(Flower_FlowerType flowerFlowerType) {
+		getFlowerFlowerTypes().remove(flowerFlowerType);
+		flowerFlowerType.setFlower(null);
+
+		return flowerFlowerType;
+	}
+
 	public Category getCategory() {
 		return this.category;
 	}
@@ -176,28 +198,6 @@ public class Flower implements Serializable {
 		orderItem.setFlower(null);
 
 		return orderItem;
-	}
-
-	public List<FlowerFlowerType> getFlowerFlowerTypes() {
-		return this.flowerFlowerTypes;
-	}
-
-	public void setFlowerFlowerTypes(List<FlowerFlowerType> flowerFlowerTypes) {
-		this.flowerFlowerTypes = flowerFlowerTypes;
-	}
-
-	public FlowerFlowerType addFlowerFlowerType(FlowerFlowerType flowerFlowerType) {
-		getFlowerFlowerTypes().add(flowerFlowerType);
-		flowerFlowerType.setFlower(this);
-
-		return flowerFlowerType;
-	}
-
-	public FlowerFlowerType removeFlowerFlowerType(FlowerFlowerType flowerFlowerType) {
-		getFlowerFlowerTypes().remove(flowerFlowerType);
-		flowerFlowerType.setFlower(null);
-
-		return flowerFlowerType;
 	}
 
 }
