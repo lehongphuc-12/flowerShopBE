@@ -41,10 +41,12 @@ public class User implements Serializable {
 	private String phone;
 
 	//bi-directional many-to-one association to Cart
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Cart> carts;
 
 	//bi-directional many-to-one association to Order
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Order> orders;
 

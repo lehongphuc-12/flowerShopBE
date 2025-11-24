@@ -1,14 +1,17 @@
 package com.phucle.flowerShopBE.controller;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.None;
+
 import com.phucle.flowerShopBE.service.UserService;
+
+
+
 import com.phucle.flowerShopBE.Utils.JwtUtil;
 import com.phucle.flowerShopBE.model.User;
 import com.phucle.flowerShopBE.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseCookie.ResponseCookieBuilder;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,9 +45,15 @@ public class UserController {
             return ResponseEntity.status(401).body(body);
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        ResponseCookie cookie = ResponseCookie.from("jwt", "").httpOnly(true).secure(false).path("/").sameSite("None").maxAge(0).build();
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Logged out successfully");
+    }
     
     @GetMapping("/profile")
-    public ResponseEntity<?> getProfile(@CookieValue(name = "jwt") String token) {
+    public ResponseEntity<?> getProfile(@CookieValue(name = "jwt", required = false) String token) {
         if (token == null || !jwtUtil.validateToken(token)) {
             return ResponseEntity.status(401).body("Invalid or missing token");
         }
@@ -53,7 +62,8 @@ public class UserController {
         Optional<User> user = userService.getUserByEmail(email);
         
         if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
+        	System.out.println(user.get());          
+        	return ResponseEntity.ok(user.get());
         } else {
             return ResponseEntity.status(404).body("User not found");
         }
