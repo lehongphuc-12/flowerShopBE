@@ -27,9 +27,6 @@ public class Flower implements Serializable {
 	@Column(name="Description")
 	private String description;
 
-	@Column(name="Design")
-	private String design;
-
 	@Column(name="FlowerName")
 	private String flowerName;
 
@@ -50,14 +47,21 @@ public class Flower implements Serializable {
 	@OneToMany(mappedBy="flower")
 	private List<Flower_FlowerType> flowerFlowerTypes;
 
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="CategoryId")
-	private Category category;
-
 	//bi-directional many-to-one association to OrderItem
 	@OneToMany(mappedBy="flower")
 	private List<OrderItem> orderItems;
+
+	//bi-directional many-to-one association to Flower_Category
+	@OneToMany(mappedBy="flower")
+	private List<Flower_Category> flowerCategories;
+
+	//bi-directional many-to-one association to Flower_Design
+	@OneToMany(mappedBy="flower")
+	private List<Flower_Design> flowerDesigns;
+
+	//bi-directional many-to-one association to Flower_Discount
+	@OneToMany(mappedBy="flower")
+	private List<Flower_Discount> flowerDiscounts;
 
 	public Flower() {
 	}
@@ -84,14 +88,6 @@ public class Flower implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getDesign() {
-		return this.design;
-	}
-
-	public void setDesign(String design) {
-		this.design = design;
 	}
 
 	public String getFlowerName() {
@@ -170,14 +166,6 @@ public class Flower implements Serializable {
 		return flowerFlowerType;
 	}
 
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
 	public List<OrderItem> getOrderItems() {
 		return this.orderItems;
 	}
@@ -198,6 +186,72 @@ public class Flower implements Serializable {
 		orderItem.setFlower(null);
 
 		return orderItem;
+	}
+
+	public List<Flower_Category> getFlowerCategories() {
+		return this.flowerCategories;
+	}
+
+	public void setFlowerCategories(List<Flower_Category> flowerCategories) {
+		this.flowerCategories = flowerCategories;
+	}
+
+	public Flower_Category addFlowerCategory(Flower_Category flowerCategory) {
+		getFlowerCategories().add(flowerCategory);
+		flowerCategory.setFlower(this);
+
+		return flowerCategory;
+	}
+
+	public Flower_Category removeFlowerCategory(Flower_Category flowerCategory) {
+		getFlowerCategories().remove(flowerCategory);
+		flowerCategory.setFlower(null);
+
+		return flowerCategory;
+	}
+
+	public List<Flower_Design> getFlowerDesigns() {
+		return this.flowerDesigns;
+	}
+
+	public void setFlowerDesigns(List<Flower_Design> flowerDesigns) {
+		this.flowerDesigns = flowerDesigns;
+	}
+
+	public Flower_Design addFlowerDesign(Flower_Design flowerDesign) {
+		getFlowerDesigns().add(flowerDesign);
+		flowerDesign.setFlower(this);
+
+		return flowerDesign;
+	}
+
+	public Flower_Design removeFlowerDesign(Flower_Design flowerDesign) {
+		getFlowerDesigns().remove(flowerDesign);
+		flowerDesign.setFlower(null);
+
+		return flowerDesign;
+	}
+
+	public List<Flower_Discount> getFlowerDiscounts() {
+		return this.flowerDiscounts;
+	}
+
+	public void setFlowerDiscounts(List<Flower_Discount> flowerDiscounts) {
+		this.flowerDiscounts = flowerDiscounts;
+	}
+
+	public Flower_Discount addFlowerDiscount(Flower_Discount flowerDiscount) {
+		getFlowerDiscounts().add(flowerDiscount);
+		flowerDiscount.setFlower(this);
+
+		return flowerDiscount;
+	}
+
+	public Flower_Discount removeFlowerDiscount(Flower_Discount flowerDiscount) {
+		getFlowerDiscounts().remove(flowerDiscount);
+		flowerDiscount.setFlower(null);
+
+		return flowerDiscount;
 	}
 
 }
