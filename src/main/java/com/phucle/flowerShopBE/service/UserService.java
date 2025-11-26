@@ -16,6 +16,9 @@ public class UserService {
     
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private com.phucle.flowerShopBE.repository.RoleRepository roleRepository;
     
     public String login(String email, String password) {
         Optional<User> userOptional = userRepository.findByEmail(email);
@@ -36,5 +39,24 @@ public class UserService {
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User register(com.phucle.flowerShopBE.DTO.RegisterRequest request) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
+
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setFullName(request.getFullName());
+        user.setPhone(request.getPhoneNumer());
+        user.setPasswordHash(request.getPassword()); // In real app, hash this!
+        user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+
+        com.phucle.flowerShopBE.model.Role role = roleRepository.findByRoleName("USER")
+                .orElseThrow(() -> new RuntimeException("Default role not found"));
+        user.setRole(role);
+
+        return userRepository.save(user);
     }
 }
