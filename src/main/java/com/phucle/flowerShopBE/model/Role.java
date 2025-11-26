@@ -4,7 +4,6 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -31,7 +30,6 @@ public class Role implements Serializable {
 	private String roleName;
 
 	//bi-directional many-to-one association to User
-	@JsonIgnore
 	@OneToMany(mappedBy="role")
 	private List<User> users;
 

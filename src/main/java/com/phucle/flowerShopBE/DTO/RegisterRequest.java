@@ -6,14 +6,14 @@ public class RegisterRequest {
 	@NotBlank(message = "full name is request")
 	private String fullName;
 	@NotBlank(message = "email is request")
-	private String email;
-	@NotBlank(message = "phoneNumer is request")
-	private String phoneNumer;
+	private String email;																				
+	@NotBlank(message = "phoneNumber is request")
+	private String phoneNumber;
 	@NotBlank(message = "password is request")
 	private String password;
-	@NotBlank(message = "full name is request")
+	@NotBlank(message = "confirm password is request")
 	private String confirmPassword;
-
+	
 	public String getFullName() {
 		return fullName;
 	}
@@ -38,12 +38,12 @@ public class RegisterRequest {
 		this.email = email;
 	}
 
-	public String getPhoneNumer() {
-		return phoneNumer;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhoneNumer(String phoneNumer) {
-		this.phoneNumer = phoneNumer;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getPassword() {

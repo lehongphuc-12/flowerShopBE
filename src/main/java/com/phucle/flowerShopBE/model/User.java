@@ -4,7 +4,6 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -33,7 +32,6 @@ public class User implements Serializable {
 	@Column(name="FullName")
 	private String fullName;
 
-	@JsonIgnore
 	@Column(name="PasswordHash")
 	private String passwordHash;
 
@@ -41,12 +39,10 @@ public class User implements Serializable {
 	private String phone;
 
 	//bi-directional many-to-one association to Cart
-	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Cart> carts;
 
 	//bi-directional many-to-one association to Order
-	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Order> orders;
 

@@ -22,9 +22,9 @@ public class Category implements Serializable {
 	@Column(name="CategoryName")
 	private String categoryName;
 
-	//bi-directional many-to-one association to Flower
+	//bi-directional many-to-one association to Flower_Category
 	@OneToMany(mappedBy="category")
-	private List<Flower> flowers;
+	private List<Flower_Category> flowerCategories;
 
 	public Category() {
 	}
@@ -45,26 +45,26 @@ public class Category implements Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public List<Flower> getFlowers() {
-		return this.flowers;
+	public List<Flower_Category> getFlowerCategories() {
+		return this.flowerCategories;
 	}
 
-	public void setFlowers(List<Flower> flowers) {
-		this.flowers = flowers;
+	public void setFlowerCategories(List<Flower_Category> flowerCategories) {
+		this.flowerCategories = flowerCategories;
 	}
 
-	public Flower addFlower(Flower flower) {
-		getFlowers().add(flower);
-		flower.setCategory(this);
+	public Flower_Category addFlowerCategory(Flower_Category flowerCategory) {
+		getFlowerCategories().add(flowerCategory);
+		flowerCategory.setCategory(this);
 
-		return flower;
+		return flowerCategory;
 	}
 
-	public Flower removeFlower(Flower flower) {
-		getFlowers().remove(flower);
-		flower.setCategory(null);
+	public Flower_Category removeFlowerCategory(Flower_Category flowerCategory) {
+		getFlowerCategories().remove(flowerCategory);
+		flowerCategory.setCategory(null);
 
-		return flower;
+		return flowerCategory;
 	}
 
 }
