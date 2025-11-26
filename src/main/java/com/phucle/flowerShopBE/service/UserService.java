@@ -49,7 +49,7 @@ public class UserService {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setFullName(request.getFullName());
-        user.setPhone(request.getPhoneNumer());
+        user.setPhone(request.getPhoneNumber());
         user.setPasswordHash(request.getPassword()); // In real app, hash this!
         user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
